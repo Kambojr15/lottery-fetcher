@@ -3,7 +3,7 @@ name: Fetch Lottery Results
 on:
   schedule:
     - cron: '* * * * *'
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   fetch:
