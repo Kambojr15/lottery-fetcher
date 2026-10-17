@@ -1,0 +1,27 @@
+name: Fetch Lottery Results
+
+on:
+  schedule:
+    - cron: '* * * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch and push results
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          INGEST_KEY: ${{ secrets.INGEST_KEY }}
+        run: python3 fetcher.py
